@@ -130,7 +130,7 @@
           <div class="grid grid-cols-2 gap-2">
             <button type="button" id="btnChooseRoleAdminUsaha" class="role-choice-btn active p-3 rounded-xl border-2 text-left transition">
               <p class="font-extrabold text-xs">1. Admin Utama Usaha</p>
-              <p class="text-[10px] text-slate-500 mt-0.5">Kontrol penuh & kelola Database Karyawan (Verifikasi Email OTP GitHub PHPMailer)</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">Kontrol penuh & kelola Database Karyawan (Verifikasi Email OTP Real-Time)</p>
             </button>
             <button type="button" id="btnChooseRoleKaryawanUsaha" class="role-choice-btn p-3 rounded-xl border-2 border-slate-200 text-left transition">
               <p class="font-extrabold text-xs">2. Karyawan Usaha</p>
@@ -140,37 +140,15 @@
 
           <!-- SUB-FORM 2A: VERIFIKASI EMAIL & KODE OTP KHUSUS ADMIN UTAMA USAHA (TERHUBUNG GITHUB OTP-EMAIL & PHPMAILER) -->
           <form id="adminUsahaOtpForm" class="space-y-3 pt-1" autocomplete="off">
-            <!-- Banner Integrasi GitHub PHPMailer & bisangoding-id/OTP-Email -->
-            <div class="p-2.5 rounded-xl bg-slate-900 text-white space-y-1.5 border border-slate-700">
-              <div class="flex flex-wrap items-center justify-between gap-1">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500 text-slate-950 px-2 py-0.5 rounded">GitHub OTP-Email & PHPMailer Connected</span>
-                <button type="button" id="btnToggleGithubOtpConfig" class="text-[10px] font-semibold bg-white/15 hover:bg-white/25 px-2 py-0.5 rounded text-amber-300 cursor-pointer">Pengaturan SMTP / GitHub OTP</button>
+            <!-- Info Keamanan Otentikasi Admin Utama -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 space-y-1">
+              <div class="flex items-center gap-1.5 font-bold text-xs text-slate-800">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>Verifikasi One-Time Password (OTP) Real-Time</span>
               </div>
-              <div class="text-[10px] text-slate-300 space-y-0.5 font-mono">
-                <div>- Library PHPMail: <a href="https://github.com/PHPMailer/PHPMailer" target="_blank" rel="noopener noreferrer" class="underline text-amber-300 hover:text-amber-200">https://github.com/PHPMailer/PHPMailer</a></div>
-                <div>- Source Code OTP: <a href="https://github.com/bisangoding-id/OTP-Email" target="_blank" rel="noopener noreferrer" class="underline text-emerald-300 hover:text-emerald-200">https://github.com/bisangoding-id/OTP-Email</a></div>
-              </div>
-              <!-- Panel Konfigurasi SMTP / PHPMailer Endpoint -->
-              <div id="githubOtpConfigPanel" class="hidden pt-2 mt-2 border-t border-slate-700 space-y-2 text-[11px]">
-                <p class="text-slate-300">Konfigurasi pengiriman OTP Email (Tabel <code class="text-amber-300">otp_mail</code>: <code class="text-emerald-300">email, otp_hash, expire</code>):</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <label class="block text-[10px] text-slate-400 mb-0.5">Email Pengirim SMTP (Gmail)</label>
-                    <input type="email" id="cfgSmtpUser" placeholder="bisangoding.id@gmail.com" class="w-full rounded bg-slate-800 border border-slate-600 px-2 py-1 text-white text-[11px]" />
-                  </div>
-                  <div>
-                    <label class="block text-[10px] text-slate-400 mb-0.5">Google App Password (16 Digit)</label>
-                    <input type="password" id="cfgSmtpPass" placeholder="xxxx xxxx xxxx xxxx" class="w-full rounded bg-slate-800 border border-slate-600 px-2 py-1 text-white text-[11px]" />
-                  </div>
-                  <div class="sm:col-span-2">
-                    <label class="block text-[10px] text-slate-400 mb-0.5">Endpoint PHP/Cloud OTP (<code class="text-amber-300">otp-email/api_otp.php</code> atau <code class="text-amber-300">/api/cloud-sync</code>)</label>
-                    <input type="text" id="cfgPhpOtpEndpoint" value="/api/cloud-sync" class="w-full rounded bg-slate-800 border border-slate-600 px-2 py-1 text-white font-mono text-[11px]" />
-                  </div>
-                </div>
-                <div id="otpDbHashInspector" class="p-2 rounded bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400">
-                  Status Tabel <span class="text-emerald-400">db_regis.otp_mail</span>: Menunggu pengiriman OTP...
-                </div>
-              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Kode verifikasi OTP 6 digit akan dikirimkan secara instan ke email resmi Admin Utama Usaha untuk otentikasi login yang aman.
+              </p>
             </div>
 
             <div>
@@ -1439,6 +1417,41 @@
             <p>Anda memiliki akses penuh ke Panel Manajemen Pengguna Aplikasi di bawah ini.</p>
           </div>
         </div>
+
+        <!-- Card 3: Konfigurasi Mail Server OTP Real-Time (Khusus Admin) -->
+        <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Integrasi Mail Server & Keamanan OTP</span>
+              <h2 class="text-base font-extrabold text-slate-900 mt-0.5">Pengaturan Mailer OTP Real-Time</h2>
+              <p class="text-xs text-slate-500">Konfigurasi pengiriman email OTP secara real-time (Mendukung SMTP Gmail / PHPMailer / Vercel Serverless Mailer API).</p>
+            </div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-300 font-bold">Modul Mailer Aktif</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Email Pengirim SMTP (Gmail / Domain)</label>
+              <input type="email" id="cfgSmtpUser" placeholder="admin@koperasi.id" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Google App Password (16 Digit)</label>
+              <input type="password" id="cfgSmtpPass" placeholder="xxxx xxxx xxxx xxxx" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Endpoint API OTP Real-Time</label>
+              <input type="text" id="cfgPhpOtpEndpoint" value="/api/cloud-sync" class="w-full border border-slate-300 rounded-lg px-3 py-2 font-mono text-xs" />
+            </div>
+          </div>
+          <div id="otpDbHashInspector" class="p-3 rounded-lg bg-slate-900 text-slate-300 font-mono text-[11px] border border-slate-700">
+            Status Modul OTP & Tabel <span class="text-emerald-400">otp_mail</span>: Siap melakukan pengiriman dan verifikasi real-time.
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+            <p class="text-[11px] text-slate-500">Mendukung arsitektur PHPMailer dan database tabel <code>otp_mail(email, otp_hash, expire)</code> dengan enkripsi SHA-256 dan kedaluwarsa 120 detik.</p>
+            <button type="button" id="btnSaveSmtpConfig" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-lg transition">Simpan Pengaturan Mailer</button>
+          </div>
+        </div>
       </div>
 
       <!-- Panel Khusus Admin: Daftar Semua Pengguna Aplikasi, Reset Password, Hapus Akun -->
@@ -1451,6 +1464,7 @@
           </div>
           <div class="flex items-center gap-2">
             <span id="adminTotalUsersBadge" class="text-xs font-bold px-3 py-1 rounded-lg bg-white/15 border border-white/20">Total: 0 Akun</span>
+            <button type="button" id="btnForceSyncAdminUsers" class="text-xs bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg shadow transition cursor-pointer">Sync Cloud</button>
           </div>
         </div>
 
@@ -2764,6 +2778,7 @@
 
     // ==================== MULTI-DEVICE CLOUD SYNC + LOCAL ENCRYPTED STATE MANAGEMENT ====================
     const USERS_STORAGE_KEY = "siakad_kdmp_v44_vault_u";
+    const DELETED_USERS_KEY = "siakad_kdmp_v44_vault_deleted_u";
     const SESSION_STORAGE_KEY = "siakad_kdmp_v44_vault_s";
     const DATA_PREFIX_KEY = "siakad_kdmp_v44_vault_d_";
     const CLOUD_API_ENDPOINT = "/api/cloud-sync";
@@ -2911,23 +2926,53 @@
           let usersChanged = false;
           let activeUserWorkspaceUpdated = false;
 
+          let deletedSet = new Set();
+          try {
+            const locD = JSON.parse(localStorage.getItem(DELETED_USERS_KEY) || "[]");
+            deletedSet = new Set(locD);
+          } catch (e) {}
+
           if (store[USERS_STORAGE_KEY]) {
-            const cloudUsers = decryptVaultPayload(store[USERS_STORAGE_KEY]);
-            if (Array.isArray(cloudUsers) && cloudUsers.length > 0) {
-              const mergedMap = {};
-              usersList.forEach(u => { mergedMap[u.uHash] = u; });
-              cloudUsers.forEach(cu => {
-                const existing = mergedMap[cu.uHash];
-                if (!existing || (Number(cu.updatedAt) || 0) >= (Number(existing.updatedAt) || 0)) {
-                  mergedMap[cu.uHash] = cu;
+            const cloudPayload = decryptVaultPayload(store[USERS_STORAGE_KEY]);
+            let cloudUsers = [];
+            let cloudDeleted = [];
+            let cloudTs = 0;
+            if (Array.isArray(cloudPayload)) {
+              cloudUsers = cloudPayload;
+            } else if (cloudPayload && typeof cloudPayload === "object") {
+              cloudUsers = Array.isArray(cloudPayload.users) ? cloudPayload.users : [];
+              cloudDeleted = Array.isArray(cloudPayload.deletedHashes) ? cloudPayload.deletedHashes : [];
+              cloudTs = Number(cloudPayload.updatedAt) || 0;
+            }
+
+            // Sync tombstones / deleted accounts
+            let localDeleted = [];
+            try {
+              localDeleted = JSON.parse(localStorage.getItem(DELETED_USERS_KEY) || "[]");
+            } catch (e) {}
+            const allDeleted = Array.from(new Set([...localDeleted, ...cloudDeleted]));
+            localStorage.setItem(DELETED_USERS_KEY, JSON.stringify(allDeleted));
+            deletedSet = new Set(allDeleted);
+
+            if (cloudUsers.length > 0) {
+              const validCloudUsers = cloudUsers.filter(u => !deletedSet.has(u.uHash));
+              if (validCloudUsers.length > 0) {
+                const oldHashes = usersList.map(u => u.uHash).sort().join(",");
+                const newHashes = validCloudUsers.map(u => u.uHash).sort().join(",");
+                if (oldHashes !== newHashes) {
                   usersChanged = true;
                 }
-              });
-              usersList = Object.values(mergedMap);
-              ensureAdminUserExists();
-              try {
-                localStorage.setItem(USERS_STORAGE_KEY, encryptVaultPayload(usersList));
-              } catch (e) {}
+                usersList = validCloudUsers;
+                ensureAdminUserExists();
+                try {
+                  const savePayload = {
+                    users: usersList,
+                    deletedHashes: allDeleted,
+                    updatedAt: Math.max(cloudTs, Date.now())
+                  };
+                  localStorage.setItem(USERS_STORAGE_KEY, encryptVaultPayload(savePayload));
+                } catch (e) {}
+              }
             }
           } else if (usersList.length > 0) {
             await pushAllLocalToCloud();
@@ -2935,6 +2980,13 @@
 
           Object.keys(store).forEach(k => {
             if (k.startsWith(DATA_PREFIX_KEY) && store[k]) {
+              const uHashMatch = k.substring(DATA_PREFIX_KEY.length);
+              const isDeleted = Array.from(deletedSet).some(dh => dh.startsWith(uHashMatch) || uHashMatch.startsWith(dh.substring(0, 24)));
+              if (isDeleted) {
+                try { localStorage.removeItem(k); } catch (e) {}
+                return;
+              }
+
               const cloudParsed = decryptVaultPayload(store[k]);
               if (!cloudParsed) return;
               let localParsed = null;
@@ -3273,10 +3325,23 @@
         const raw = localStorage.getItem(USERS_STORAGE_KEY) || localStorage.getItem("siakad_kdmp_v43_vault_u");
         if (raw) {
           const parsed = decryptVaultPayload(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            usersList = parsed;
+          let loaded = [];
+          if (Array.isArray(parsed)) {
+            loaded = parsed;
+          } else if (parsed && typeof parsed === "object" && Array.isArray(parsed.users)) {
+            loaded = parsed.users;
+            if (Array.isArray(parsed.deletedHashes)) {
+              localStorage.setItem(DELETED_USERS_KEY, JSON.stringify(parsed.deletedHashes));
+            }
+          }
+          if (loaded.length > 0) {
+            let deletedHashes = [];
+            try {
+              deletedHashes = JSON.parse(localStorage.getItem(DELETED_USERS_KEY) || "[]");
+            } catch (e) {}
+            const delSet = new Set(deletedHashes);
+            usersList = loaded.filter(u => !delSet.has(u.uHash));
             ensureAdminUserExists();
-            saveUsers();
             return;
           }
         }
@@ -3285,12 +3350,20 @@
       }
       usersList = JSON.parse(JSON.stringify(DEFAULT_USERS));
       ensureAdminUserExists();
-      saveUsers();
     }
 
     function saveUsers() {
       try {
-        const enc = encryptVaultPayload(usersList);
+        let deletedHashes = [];
+        try {
+          deletedHashes = JSON.parse(localStorage.getItem(DELETED_USERS_KEY) || "[]");
+        } catch (e) {}
+        const payload = {
+          users: usersList,
+          deletedHashes: deletedHashes,
+          updatedAt: Date.now()
+        };
+        const enc = encryptVaultPayload(payload);
         localStorage.setItem(USERS_STORAGE_KEY, enc);
         pushKeyToCloud(USERS_STORAGE_KEY, enc);
       } catch (e) {
@@ -6600,6 +6673,12 @@
         showToast(ok ? "Data akun & koperasi berhasil disinkronkan dari Cloud!" : "Sinkronisasi selesai (Mode Lokal/Standby).");
       });
 
+      document.getElementById("btnForceSyncAdminUsers")?.addEventListener("click", async () => {
+        const ok = await pullAllFromCloud(false);
+        renderAll();
+        showToast(ok ? "Daftar seluruh akun berhasil disinkronkan terbaru dari Cloud!" : "Sinkronisasi selesai (Mode Lokal/Standby).");
+      });
+
       // Poin 6: Login Khusus Karyawan (Cukup sebutkan Nama Koperasi, Username/Nama Karyawan, dan Password Karyawan)
       function matchEmployeeRecord(emp, queryUserOrName, pwdRaw) {
         if (!emp || !queryUserOrName) return false;
@@ -6738,13 +6817,23 @@
         authErrorBox.classList.add("hidden");
       });
 
-      // Poin 8: Integrasi GitHub OTP-Email (bisangoding-id/OTP-Email & PHPMailer/PHPMailer) + 6 Kotak Input Auto-Paste + Countdown Timer
+      // Poin 8: Integrasi Pengiriman OTP Real-Time (Arsitektur PHPMailer / Mailer API) + 6 Kotak Input Auto-Paste + Countdown Timer
       let localFallbackOtpHash = "";
       let otpCountdownInterval = null;
       let otpRemainingSecs = 0;
 
-      document.getElementById("btnToggleGithubOtpConfig")?.addEventListener("click", () => {
-        document.getElementById("githubOtpConfigPanel")?.classList.toggle("hidden");
+      // Inisialisasi konfigurasi Mailer dari localStorage
+      const savedSmtpCfg = JSON.parse(localStorage.getItem("siakad_smtp_config") || "{}");
+      if (savedSmtpCfg.user && document.getElementById("cfgSmtpUser")) document.getElementById("cfgSmtpUser").value = savedSmtpCfg.user;
+      if (savedSmtpCfg.pass && document.getElementById("cfgSmtpPass")) document.getElementById("cfgSmtpPass").value = savedSmtpCfg.pass;
+      if (savedSmtpCfg.endpoint && document.getElementById("cfgPhpOtpEndpoint")) document.getElementById("cfgPhpOtpEndpoint").value = savedSmtpCfg.endpoint;
+
+      document.getElementById("btnSaveSmtpConfig")?.addEventListener("click", () => {
+        const user = (document.getElementById("cfgSmtpUser")?.value || "").trim();
+        const pass = (document.getElementById("cfgSmtpPass")?.value || "").trim();
+        const endpoint = (document.getElementById("cfgPhpOtpEndpoint")?.value || "").trim() || "/api/cloud-sync";
+        localStorage.setItem("siakad_smtp_config", JSON.stringify({ user, pass, endpoint }));
+        showToast("Pengaturan Mailer OTP berhasil disimpan.");
       });
 
       const otpBoxInputs = Array.from(document.querySelectorAll("#otpSixBoxesContainer .otp-digit-box"));
@@ -6893,7 +6982,7 @@
         const otpBanner = document.getElementById("otpSimulatedInboxBanner");
         const otpPreview = document.getElementById("otpEmailBodyPreview");
         otpBanner.classList.remove("hidden");
-        otpPreview.innerHTML = `Kode verifikasi OTP 6-digit telah dikirimkan melalui modul <strong>PHPMailer / GitHub OTP-Email</strong> ke alamat email <strong>${regEmail}</strong> (tersimpan terenkripsi pada tabel <code>otp_mail</code>). Silakan copy-paste 6 digit kode dari email Anda ke kotak di bawah.${fallbackCodeForInspector ? ` <button type="button" id="btnAutoFillSandboxOtp" class="ml-1 underline font-bold text-emerald-900 hover:text-red-700 cursor-pointer">[Tempel Otomatis OTP Sandbox: ${fallbackCodeForInspector}]</button>` : ""}`;
+        otpPreview.innerHTML = `Kode verifikasi OTP 6-digit telah dikirimkan secara real-time ke alamat email <strong>${regEmail}</strong>. Silakan periksa Kotak Masuk atau folder Spam email Anda, lalu masukkan 6 digit kode ke kotak di bawah.${fallbackCodeForInspector ? ` <button type="button" id="btnAutoFillSandboxOtp" class="ml-1 underline font-bold text-emerald-900 hover:text-red-700 cursor-pointer">[Tempel Otomatis OTP Pengujian: ${fallbackCodeForInspector}]</button>` : ""}`;
         document.getElementById("btnAutoFillSandboxOtp")?.addEventListener("click", () => {
           syncMainOtpToBoxes(fallbackCodeForInspector);
           if (mainOtpInput) mainOtpInput.value = fallbackCodeForInspector;
@@ -8226,13 +8315,33 @@
             "Hapus Akun Pengguna Aplikasi",
             `Apakah Anda yakin ingin menghapus akun "${targetUser.fullName}" (${getPlainUsername(targetUser)}) beserta seluruh data ruang kerjanya?`,
             () => {
+              const delKey = getUserStorageKey(targetUser);
               try {
-                localStorage.removeItem(getUserStorageKey(targetUser));
+                localStorage.removeItem(delKey);
               } catch (err) {}
-              usersList = usersList.filter(u => u.uid !== uid);
+
+              // Tambahkan targetUser.uHash ke tombstone deleted hashes
+              let deletedHashes = [];
+              try {
+                deletedHashes = JSON.parse(localStorage.getItem(DELETED_USERS_KEY) || "[]");
+              } catch (e) {}
+              if (!deletedHashes.includes(targetUser.uHash)) {
+                deletedHashes.push(targetUser.uHash);
+              }
+              localStorage.setItem(DELETED_USERS_KEY, JSON.stringify(deletedHashes));
+
+              usersList = usersList.filter(u => u.uid !== uid && u.uHash !== targetUser.uHash);
               saveUsers();
+
+              // Hapus workspace key dari Cloud Server
+              fetch(CLOUD_API_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "delete_key", key: delKey })
+              }).catch(() => {});
+
               renderAll();
-              showToast(`Akun pengguna "${targetUser.fullName}" berhasil dihapus oleh Administrator Aplikasi.`);
+              showToast(`Akun pengguna "${targetUser.fullName}" berhasil dihapus & disinkronkan ke seluruh device.`);
             }
           );
         }
