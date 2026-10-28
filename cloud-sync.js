@@ -18,7 +18,7 @@ import tls from "tls";
 //    Environment Variables dengan Name: SMTP_PASS dan Value: 16 digit kode.
 // ============================================================================
 const DEFAULT_SMTP_USER = process.env.SMTP_USER || "kkmmagelang@gmail.com";
-const DEFAULT_SMTP_PASS = process.env.SMTP_PASS || "TEMPEL_16_DIGIT_KODE_APP_PASSWORD_DISINI";
+const DEFAULT_SMTP_PASS = process.env.SMTP_PASS || "fastssuklvufixdi";
 
 const TMP_STORE_PATH = path.join("/tmp", "siakad_kdmp_cloud_vault_v45.json");
 const OTP_SECRET_SALT = process.env.OTP_SECRET_SALT || "SIAKAD_KDMP_OTP_SERVER_SECRET_2026";
